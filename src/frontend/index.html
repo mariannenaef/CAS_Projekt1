@@ -4,40 +4,43 @@
     <meta charset="UTF-8">
     <title>Note Pro</title>
     <link rel="stylesheet" href="./css/stylesheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script id="notes-template" type="text/x-handlebars-template">
+        <ul>
+            {{#each this}}
+            <li>
+                <p>{{title}}</p>
+                <p>{{importance}}</p>
+                <input type="text" value="{{description}}"></inpute>
+                <button>Edit</button>
+            </li>
+            {{/each}}
+        </ul>
+    </script>
 </head>
 <body>
-    <div class="navigation">
-        <button>Neue Notiz erstellen</button>
+    <header>
+        <button id="btnNewNote">Neue Notiz erstellen</button>
         <select>
             <option>SchwarzWeiss-Stil</option>
             <option>Dunkel-Stil</option>
         </select>
-        <button>Nach Datum abgeschlossen</button>
-        <button>Nach Erstellungsdatum</button>
-        <button>Nach Wichtigkeit</button>
-        <button>Einblenden Erledigte</button>
-    </div>
+        <h4>Sortierung</h4>
+        <h4>Ein-/Ausblenden</h4>
+        <button>abgeschlossen</button>
+        <button>Erstellung</button>
+        <button>Wichtigkeit</button>
+        <button>Erledigte</button>
+    </header>
 
-    <ul></ul>
-    <form>
-        <label for="title">Titel</label>
-        <input type="text" name="title" id="title" value="">
+    <h1>Meine Notizen</h1>
+    <div id="container"></div>
 
-        <label for="description">Beschreibung</label>
-        <input type="text" name="description" id="description" value="">
-
-        <label for="importance">Wichtigkeit</label>
-        <input type="text" name="importance" id="importance" value="">
-
-        <label for="dueto">Erledigen bis</label>
-        <input type="date" name="dueto" id="dueto" value="">
-
-        <button>Speichern</button>
-        <button>Cancel</button>
-
-    </form>
+    <form></form>
     <footer>
         <p>&copy; Marianne Naef</p>
     </footer>
+    <script src="factory/note.js"></script>
+    <script src="controller/notecontroller.js"></script>
 </body>
 </html>
