@@ -46,9 +46,8 @@ ul{
 
 /*form for creating and editing*/
 form{
-    visibility: hidden;
     display: grid;
-    grid-template-columns: 20% 1fr;
+    grid-template-columns: 8em 1fr;
     grid-row-gap: 0.5em;
 }
 form > button:not(:last-child){
@@ -56,7 +55,7 @@ form > button:not(:last-child){
 }
 form > button:last-child{
     grid-column: 2;
-    width: 15%;
+    width: 20%;
     justify-self: flex-end;
 }
 
