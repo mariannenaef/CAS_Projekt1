@@ -1,9 +1,9 @@
 export class Note{
-    constructor(title, description, importance, dueTo) {
+    constructor(title, description, importance) {
         this.title = title;
         this.description = description;
         this.importance = importance;
-        this.dueTo = dueTo;
+        this.dueTo = '';
         this.doneDate;
     }
 

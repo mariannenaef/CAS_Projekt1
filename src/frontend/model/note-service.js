@@ -5,10 +5,9 @@ export class NoteService{
         this.notes = [];
     }
 
-    addNote(title, description, importance, dueTo){
-        const note = new Note(title, description, importance, dueTo);
-        this.notes.push(note);
-        return this.notes;
+    addNote(note){
+        const newNote = new Note(note.title.value, note.description.value, note.importance.value);
+        this.notes.push(newNote);
     }
 
     getNotes(){

@@ -11,7 +11,7 @@ export class NoteController {
         this.editBtn = document.getElementById('btnNewNote');
         this.mainPage = document.getElementById('mainpage');
 
-        this.formContainer = document.getElementsByName('form');
+        this.formContainer = document.getElementById('editNotes');
 
 
     }
@@ -24,16 +24,31 @@ export class NoteController {
         this.editNotesContainer.innerHTML = this.editNotesTemplateCompiled({editNotes: this.editNoteService.note});
     }
 
+    saveNote(note){
+        this.noteService.addNote(note);
+    }
+
     initEventHandlers() {
 
         this.editBtn.addEventListener('click', (event) => {
             this.mainPage.style.display = 'none';
+            this.formContainer.style.display = null;
             this.showEditNotes();
         });
 
-        this.formContainer.addEventListener( 'click', (event) =>{
-           this.mainPage.style.display = 'block';
-           this.formContainer.style.display = 'none';
+        this.formContainer.addEventListener( 'submit', (event) =>{
+            const createAction = document.activeElement.dataset.action;
+
+           if(createAction === 'save'){
+                this.saveNote(this.editNotesContainer.elements);
+           }
+
+            this.formContainer.style.display = 'none';
+            this.mainPage.style.display = null;
+
+            this.showNotes();
+
+            event.preventDefault();
         });
 
     }

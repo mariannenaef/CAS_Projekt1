@@ -11,7 +11,7 @@
 
     <script id="notes-template" type="text/x-handlebars-template">
         <ul>
-            {{#each this}}
+            {{#each notes}}
             <li>
                 <p>{{title}}</p>
                 <p>{{importance}}</p>
@@ -19,6 +19,9 @@
                 <button>Edit</button>
             </li>
             {{/each}}
+            {{#unless notes.length}}
+            <p>Keine Notizen vorhanden</p>
+            {{/unless}}
         </ul>
     </script>
 
@@ -35,8 +38,8 @@
             <label for="dueto">Erledigen bis</label>
             <input type="date" name="dueto" id="dueto" value="">{{dueto}}</input >
 
-            <button>Speichern</button>
-            <button>Cancel</button>
+            <button type="submit" data-action="save">Speichern</button>
+            <button type="submit" data-action="cancel">Cancel</button>
     </script>
 </head>
 <body>
