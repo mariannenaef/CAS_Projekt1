@@ -6,13 +6,14 @@ export class NoteService{
     }
 
     addNote(note){
-        const newNote = new Note(note.title.value, note.description.value, note.importance.value);
+        const newNote = new Note(this.notes.length, note.title.value, note.description.value, note.importance.value);
         this.notes.push(newNote);
     }
 
-    getNotes(){
-        return this.notes;
+    updateNote(note){
+        this.notes[note.id.value].title = note.title.value;
+        this.notes[note.id.value].description = note.description.value;
+        this.notes[note.id.value].importance = note.importance.value;
     }
-
 
 }

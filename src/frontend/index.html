@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Note Pro</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/stylesheet.css">
 
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
@@ -13,10 +13,15 @@
         <ul>
             {{#each notes}}
             <li>
-                <p>{{title}}</p>
-                <p>{{importance}}</p>
-                <input type="text" value="{{description}}"></inpute>
-                <button>Edit</button>
+                <form data-id={{id}}>
+                    <p>Endtermin</p>
+                    <p>{{title}}</p>
+                    <p>{{importance}}</p>
+                    <input type="checkbox" id="finished{{id}}" value="finished">
+                    <label for="finished{{id}}">erledigt [13.12.2020]</label>
+                    <textarea>{{description}}</textarea>
+                    <button type="submit">Edit</button>
+                </form>
             </li>
             {{/each}}
             {{#unless notes.length}}
@@ -62,8 +67,9 @@
         <div id="notes"></div>
     </div>
 
-        <form id="editNotes"></form>
-
+    <form id="editNotesForm">
+        <div id="editNotes"></div>
+    </form>
 
     <footer>
         <p>&copy; Marianne Naef</p>

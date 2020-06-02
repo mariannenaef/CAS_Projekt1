@@ -1,5 +1,6 @@
 export class Note{
-    constructor(title, description, importance) {
+    constructor(id, title, description, importance) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.importance = importance;
