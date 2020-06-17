@@ -1,12 +1,9 @@
-
 export class NoteController {
-    constructor(noteService, editNoteService) {
+    constructor(noteService, ) {
         this.noteService = noteService;
-        this.editNoteService = editNoteService;
 
         this.noteTemplateCompiled = Handlebars.compile(document.getElementById("notes-template").innerHTML);
         this.editNotesTemplateCompiled = Handlebars.compile(document.getElementById("editNotes-template").innerHTML);
-
 
         this.noteContainer = document.getElementById('notes');
         this.editNotesForm = document.getElementById('editNotesForm');
@@ -16,8 +13,7 @@ export class NoteController {
     }
 
     showNotes(){
-        this.noteContainer.innerHTML =this.noteTemplateCompiled({notes: this.noteService.notes});
-
+        this.noteContainer.innerHTML =this.noteTemplateCompiled({notes: this.noteService.getNotesWithDateText()});
         if(this.noteService.notes.length > 0){
             this.divImportance = document.querySelectorAll('div[data-showImportance]');
             for (let div of this.divImportance){
@@ -36,6 +32,7 @@ export class NoteController {
 
     showEditNotes(note){
         this.editNotesForm.innerHTML = this.editNotesTemplateCompiled({editNote: note});
+        document.getElementById('dueTo').setAttribute("min",new Date().toISOString().split("T")[0]);
         if(note && note.importance>0){
             const childrenImportance = document.getElementById('importance').children;
             changeClassToAllPreviousSiblings(childrenImportance.item(note.importance-1), 'important');
@@ -48,16 +45,6 @@ export class NoteController {
 
     updateNote(id, note){
         this.noteService.updateNote(id, note);
-    }
-
-    getNoteInformation(id){
-        this.noteObject = {
-            id: id,
-            title: document.getElementById('title'+id).innerHTML,
-            description: document.getElementById('description'+id).innerHTML,
-            importance: document.getElementById('importance'+id).getAttribute('data-showimportance'),
-        }
-        return this.editNoteService.fillNote(this.noteObject);
     }
 
     initEventHandlers() {
@@ -97,14 +84,17 @@ export class NoteController {
             event.preventDefault();
         });
 
-        this.noteContainer.addEventListener( 'submit', (event) =>{
+        this.noteContainer.addEventListener( 'click', (event) =>{
 
+            const isButton = (event.target.nodeName === 'BUTTON');
+            if(!isButton){
+                return;
+            }
             this.formId = event.target.dataset.noteid;
 
             this.mainPage.style.display = 'none';
             this.editNotesForm.style.display = null;
-            this.note = this.getNoteInformation(this.formId);
-            this.showEditNotes(this.note);
+            this.showEditNotes(this.noteService.getNoteById(this.formId));
             event.preventDefault();
         });
 

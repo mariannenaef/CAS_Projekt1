@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Note Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/stylesheet.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
 
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script src="scripts/bootstrapper.js" type="module" defer></script>
@@ -14,15 +14,13 @@
         <ul>
             {{#each notes}}
             <li>
-                <form data-noteid={{id}} id="note{{id}}">
-                    <p>Endtermin</p>
-                    <p id="title{{id}}">{{title}}</p>
-                    <div id="importance{{id}}" data-showImportance="{{importance}}"></div>
-                    <input type="checkbox" id="finished{{id}}" value="finished">
-                    <label for="finished{{id}}">erledigt [13.12.2020]</label>
-                    <textarea id="description{{id}}">{{description}}</textarea>
-                    <button type="submit">Edit</button>
-                </form>
+                <p>{{dueToText}}</p>
+                <p id="title{{id}}">{{title}}</p>
+                <div id="importance{{id}}" data-showImportance="{{importance}}"></div>
+                <input type="checkbox" id="finished{{id}}" value="finished">
+                <label for="finished{{id}}">erledigt [13.12.2020]</label>
+                <textarea id="description{{id}}">{{description}}</textarea>
+                <button data-noteid={{id}}>Edit</button>
             </li>
             {{/each}}
             {{#unless notes.length}}
@@ -33,10 +31,10 @@
 
     <script id="editNotes-template" type="text/x-handlebars-template">
             <label for="title">Titel</label>
-            <input type="text" name="title" id="title" value="{{editNote.title}}" required></input >
+            <input type="text" name="title" id="title" value="{{editNote.title}}" minlength="3" required></input >
 
             <label for="description">Beschreibung</label>
-            <input type="text" name="description" id="description" value="{{editNote.description}}" required></input >
+            <input type="text" name="description" id="description" value="{{editNote.description}}" minlength="3" required></input >
 
             <label for="importance">Wichtigkeit</label>
             <div name="importance" id="importance" data-importance="" required>
@@ -47,8 +45,8 @@
                 <button type="click" class="notImportant">&#x2667</button>
             </div>
 
-            <label for="dueto">Erledigen bis</label>
-            <input type="date" name="dueto" id="dueto" value="{{editNote.dueto}}"></input >
+            <label for="dueTo">Erledigen bis</label>
+            <input type="date" name="dueTo" id="dueTo" value="{{editNote.dueTo}}" required></input >
 
             <button type="submit" data-noteid="{{editNote.id}}" data-action="save">Speichern</button>
             <button type="submit" data-action="cancel">Cancel</button>
