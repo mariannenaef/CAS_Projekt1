@@ -32,9 +32,13 @@ export class NoteStore {
     async add(note) {
         let newNote = new Note(note.id, note.title, note.description, note.importance, note.dueTo);
         console.log('nodeStore, add following note: ' + newNote.toString());
-        return await this.db.insert(note, function(err, doc) {
-            console.log('Inserted', doc.name, 'with ID', doc._id)
+        return await this.db.insert(note).then(doc => {
+            console.log('Inserted', doc.name, 'with ID', doc._id);
+            return doc;
         });
+        // return await this.db.insert(note, function(err, doc) {
+        //     console.log('Inserted', doc.name, 'with ID', doc._id)
+        // });
     };
 
     async update(note){
