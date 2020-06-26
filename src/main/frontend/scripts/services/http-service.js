@@ -2,7 +2,7 @@ class HttpService{
     ajax(method, url, data, headers){
 
         const fetchHeaders = new Headers({'content-type': 'application/json', ...(headers || {})});
-        const urlPath = 'http://localhost:3001' + url;
+        const urlPath = 'http://localhost:3002' + url;
 
         return fetch(urlPath, {
             method: method,
@@ -10,10 +10,11 @@ class HttpService{
             headers: fetchHeaders,
             body: JSON.stringify(data)
         }).then(response => {
+            console.log(response);
             return response.json();
         }).catch(error =>{
-            console.error('There has been a problem with the fetch operation:', error);
-        })
+            console.error(`There has been a problem with the fetch operation ${method}: ${error}`);
+        });
     }
 }
 

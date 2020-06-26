@@ -12,8 +12,8 @@ export class NoteController {
 
     }
 
-    showNotes(){
-        this.noteContainer.innerHTML =this.noteTemplateCompiled({notes: this.noteService.getNotesWithDateText()});
+    async showNotes(){
+        this.noteContainer.innerHTML = this.noteTemplateCompiled({notes: await this.noteService.getNotesWithDateText()});
         if(this.noteService.notes.length > 0){
             this.divImportance = document.querySelectorAll('div[data-showImportance]');
             for (let div of this.divImportance){
@@ -39,12 +39,12 @@ export class NoteController {
         }
     }
 
-    saveNote(note){
-        this.noteService.addNote(note);
+    async saveNote(note){
+        await this.noteService.addNote(note);
     }
 
-    updateNote(id, note){
-        this.noteService.updateNote(id, note);
+    updateNote(_id, note){
+        this.noteService.updateNote(_id, note);
     }
 
     initEventHandlers() {
@@ -66,14 +66,14 @@ export class NoteController {
             event.preventDefault();
         });
 
-        this.editNotesForm.addEventListener( 'submit', (event) =>{
+        this.editNotesForm.addEventListener( 'submit', async event =>{
             const createAction = document.activeElement.dataset.action;
             const noteId = document.activeElement.dataset.noteid;
 
            if(createAction === 'save' && noteId){
-               this.updateNote(noteId, this.editNotesForm.elements);
+              await this.updateNote(noteId, this.editNotesForm.elements);
            }else if(createAction === 'save'){
-               this.saveNote(this.editNotesForm.elements);
+              await this.saveNote(this.editNotesForm.elements);
            }
 
             this.editNotesForm.style.display = 'none';

@@ -13,12 +13,12 @@ const allowCrossDomain = function(req, res, next) {
     next();
 };
 
+// app.use(bodyParser.json());
+app.use(express.json());
+
 app.use(express.static(path.resolve('public/html')));
 app.use(express.static(path.resolve('public')));
 app.use(allowCrossDomain);
-
-//app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 app.use("/notes", noteRoutes);
 
@@ -28,7 +28,7 @@ app.use(function (err, req, res, next) {
 });
 
 const hostname = '127.0.0.1';
-const port = 3001;
+const port = 3002;
 app.listen(port, hostname, () =>{
     console.log('Server running at http://' + hostname + ':' + port + '/');
 });

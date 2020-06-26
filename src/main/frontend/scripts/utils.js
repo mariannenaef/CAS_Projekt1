@@ -11,7 +11,7 @@ function getRelativeDateText(date) {
     let dateFormatted = setZeroTimeToDate(new Date(date));
     const dayInMilSec = 1000*60*60*24;
     const days = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
-    let relativeDateText = '';
+    let relativeDateText = 'kein Datum definiert';
     if(today > dateFormatted){
         relativeDateText = 'zu spät!';
     }
@@ -32,7 +32,7 @@ function getRelativeDateText(date) {
     }
     else if (dateFormatted-today < 7* dayInMilSec) {
         relativeDateText = 'nächsten ' + days[new Date(date).getDay()];
-    }else {
+    }else if (dateFormatted-today < 14 * dayInMilSec) {
         relativeDateText= days[new Date(date).getDay()] + ' in einer Woche';
     }
     return relativeDateText;

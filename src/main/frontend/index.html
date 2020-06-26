@@ -15,12 +15,12 @@
             {{#each notes}}
             <li>
                 <p>{{dueToText}}</p>
-                <p id="title{{id}}">{{title}}</p>
-                <div id="importance{{id}}" data-showImportance="{{importance}}"></div>
-                <input type="checkbox" id="finished{{id}}" value="finished">
-                <label for="finished{{id}}">erledigt [13.12.2020]</label>
-                <textarea id="description{{id}}">{{description}}</textarea>
-                <button data-noteid={{id}}>Edit</button>
+                <p>{{title}}</p>
+                <div data-showImportance="{{importance}}"></div>
+                <input type="checkbox" id="finished{{_id}}" value="finished">
+                <label for="finished{{_id}}">erledigt [13.12.2020]</label>
+                <textarea>{{description}}</textarea>
+                <button data-noteid={{_id}}>Edit</button>
             </li>
             {{/each}}
             {{#unless notes.length}}
@@ -37,7 +37,7 @@
             <input type="text" name="description" id="description" value="{{editNote.description}}" minlength="3" required></input >
 
             <label for="importance">Wichtigkeit</label>
-            <div name="importance" id="importance" data-importance="" required>
+            <div name="importance" id="importance" data-importance="">
                 <button type="click" class="notImportant">&#x2667</button>
                 <button type="click" class="notImportant">&#x2667</button>
                 <button type="click" class="notImportant">&#x2667</button>
@@ -48,8 +48,8 @@
             <label for="dueTo">Erledigen bis</label>
             <input type="date" name="dueTo" id="dueTo" value="{{editNote.dueTo}}" required></input >
 
-            <button type="submit" data-noteid="{{editNote.id}}" data-action="save">Speichern</button>
-            <button type="submit" data-action="cancel">Cancel</button>
+            <button type="submit" data-noteid="{{editNote._id}}" data-action="save">Speichern</button>
+            <button type="submit" data-action="cancel" formnovalidate>Cancel</button>
     </script>
 </head>
 <body>

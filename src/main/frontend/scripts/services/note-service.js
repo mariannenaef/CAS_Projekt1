@@ -8,36 +8,34 @@ export class NoteService{
 
     async addNote(note){
         const importance = document.getElementById('importance').querySelectorAll('.important').length;
-        let countNotes = 0;
-        if(this.notes){
-            countNotes = this.notes.length;
-        }
-        const newNote = new Note(countNotes, note.title.value, note.description.value, importance, note.dueTo.value);
-        return await httpService.ajax("POST", "/notes/", JSON.stringify(newNote));
+        const newNote = new Note(note.title.value, note.description.value, importance, note.dueTo.value);
+        return await httpService.ajax("POST", "/notes/", newNote);
     }
 
-    updateNote(id, note){
-        this.notes[id].title = note.title.value;
-        this.notes[id].description = note.description.value;
-        this.notes[id].importance = document.getElementById('importance').querySelectorAll('.important').length;
+    async updateNote(_id, note){
+        let noteToUpdate = this.getNoteById(_id);
+        noteToUpdate.title = note.title.value;
+        noteToUpdate.description = note.description.value;
+        noteToUpdate.importance = document.getElementById('importance').querySelectorAll('.important').length;
+        noteToUpdate.dueTo = note.dueTo.value;
+        await httpService.ajax("PUT", `/notes/${_id}`, noteToUpdate);
     }
 
-    async getNotesWithDateText(){
-        this.notes = this.getNotes();
+     async getNotesWithDateText(){
+        this.notes = await this.getNotes();
         for(let i=0; this.notes.length>i; i++){
             this.notes[i].dueToText = getRelativeDateText(this.notes[i].dueTo);
-        }
+        };
         return this.notes;
     }
 
     async getNotes() {
-        let noteList = await httpService.ajax("GET", "/notes/getNotes", undefined);
-        this.notes = noteList;
+        this.notes = await httpService.ajax("GET", "/notes/getNotes", undefined);
         return this.notes;
     }
 
-    getNoteById(id){
-        return this.notes[id];
+    getNoteById(_id){
+        return this.notes.find(o => o._id === _id);
     }
 
 }
