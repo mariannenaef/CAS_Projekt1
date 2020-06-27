@@ -1,10 +1,6 @@
-{"title":"Elefant frisst","description":"noch mehr als HASE","importance":0,"dueTo":"2020-07-03","_id":"DfzbHnu3DabtfBGC"}
-{"title":"nochmals ein Versuch","description":"irgendwann muss es klappen","importance":3,"dueTo":"2020-06-26","_id":"XoWBICc6WCltFVWw"}
-{"title":"Nochmals eine Notiz","description":"Etwas Neues!!!!","importance":4,"dueTo":"2020-07-02","_id":"hNL7aQeqj0nZQv4i"}
-{"title":"1. Notiz","description":"Speicherung","importance":3,"dueTo":"2020-06-28","_id":"jMyJyUFs0V13O7Cj"}
-{"title":"hhhhhhhhhhhhh","description":"wwwwwww","importance":1,"dueTo":"2020-07-11","_id":"nX3ucJP0mlju0zuI"}
-{"title":"was noch zu tun ist","description":"Beschreibung kasdlfjldsaf ","importance":2,"dueTo":"2020-08-22","_id":"pQFExoTQzYXnNicr"}
-{"title":"nochmals was neues","description":"oooooo ","importance":4,"dueTo":"2020-06-28","_id":"qYSSSYxHrHDuyqVd"}
-{"title":"Hase hoppelt","description":"zu Fressen geben JEDEN TAG!!!","importance":3,"dueTo":"2020-06-25","_id":"veUZMDZnwpZX9KC1"}
-{"title":"Nochmals eine Notiz","description":"iiiiiiiiii","importance":5,"dueTo":"2020-06-26","_id":"wQ1NbTMFMqYJ3agi"}
-{"title":"iiiiiiiiiiiiiiiiiiiiiiiiii","description":"wwwwwww","importance":1,"dueTo":"2020-07-11","_id":"nX3ucJP0mlju0zuI"}
+{"title":"Fenster putzen","description":"im Herbst Fenster putzen ","importance":1,"dueTo":"2020-10-22","doneDate":"","isDone":"false","createDate":"2020-6-27","_id":"3uFYqS6PyecnVarf"}
+{"title":"Wanderung planen","description":"Wanderung inkl. Schlechtwetterprogramm planen","importance":3,"dueTo":"2020-07-02","doneDate":"27.6.2020","isDone":"true","createDate":"2020-6-27","_id":"8Tntpc6K6fE2fTzu"}
+{"title":"Boschten","description":"Weekend einkauf erledigen für Kollegen","importance":4,"dueTo":"2020-07-05","doneDate":"","isDone":"false","createDate":"2020-6-27","_id":"CFstBb7mJWr76GwB"}
+{"title":"Projekt abschliessen","description":"- Funktionalität prüfen, keine Kommentare, kein toter Code etc.","importance":5,"dueTo":"2020-06-28","doneDate":"","isDone":"false","createDate":"2020-6-27","_id":"PrL6jhcRcayoO7Zp"}
+{"title":"Würste bestellen","description":"Für Kollegenessen, 20 Würste bestellen","importance":4,"dueTo":"2020-06-29","doneDate":"","isDone":"false","createDate":"2020-6-27","_id":"uG9sN91kKEIhPupw"}
+{"title":"Fenster putzen","description":"im Herbst Fenster putzen ","importance":1,"dueTo":"2020-10-23","doneDate":"","isDone":"false","createDate":"2020-6-27","_id":"3uFYqS6PyecnVarf"}

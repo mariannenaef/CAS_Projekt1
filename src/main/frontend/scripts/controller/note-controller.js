@@ -7,13 +7,24 @@ export class NoteController {
 
         this.noteContainer = document.getElementById('notes');
         this.editNotesForm = document.getElementById('editNotesForm');
-        this.btnNewNote = document.getElementById('btnNewNote');
         this.mainPage = document.getElementById('mainpage');
+        this.cssSelector = document.getElementById('cssSelector');
+        this.cssStylesheet = document.getElementById('cssStylesheet');
+
+        // buttons
+        this.btnNewNote = document.getElementById('btnNewNote');
+        this.btnsSort = document.querySelectorAll('button[data-btnsort]');
+        this.btnFilter = document.querySelector('button[data-btnfilter]');
+
+        this.sortingRule = 'importance';
+        this.showDoneNotes = 'false';
 
     }
 
-    async showNotes(){
-        this.noteContainer.innerHTML = this.noteTemplateCompiled({notes: await this.noteService.getNotesWithDateText()});
+    showNotes(){
+        this.filterDoneNotes(this.showDoneNotes);
+        this.sortNotes(this.sortingRule);
+        this.noteContainer.innerHTML = this.noteTemplateCompiled({notes: this.noteService.getFilteredNotes()});
         if(this.noteService.notes.length > 0){
             this.divImportance = document.querySelectorAll('div[data-showImportance]');
             for (let div of this.divImportance){
@@ -27,7 +38,10 @@ export class NoteController {
                 }
             }
         }
+    }
 
+    async getDBNotes(){
+        return await this.noteService.getNotesToShow();
     }
 
     showEditNotes(note){
@@ -47,6 +61,15 @@ export class NoteController {
         this.noteService.updateNote(_id, note);
     }
 
+    sortNotes(sortingRule){
+        this.noteService.sortNotes(sortingRule);
+    }
+
+    filterDoneNotes(){
+        return this.noteService.filterNotes(this.showDoneNotes);
+    }
+
+
     initEventHandlers() {
 
         this.btnNewNote.addEventListener('click', (event) => {
@@ -54,6 +77,34 @@ export class NoteController {
             this.editNotesForm.style.display = null;
             this.showEditNotes();
         });
+
+        this.cssSelector.addEventListener('click',  (event) =>{
+            if(event.target.value === 'dark'){
+                this.cssStylesheet.href = 'css/stylesheet_dark.css';
+            }else{
+                this.cssStylesheet.href = 'css/stylesheet.css';
+            }
+        });
+
+        this.btnsSort.forEach(item => {
+            item.addEventListener('click', (event) => {
+                this.sortingRule = event.target.dataset.btnsort;
+                this.showNotes();
+                event.preventDefault();
+            });
+        });
+
+        this.btnFilter.addEventListener('click', (event) =>{
+            if(this.showDoneNotes === 'true'){
+                this.showDoneNotes = 'false';
+                this.btnFilter.innerText = 'Erledigte';
+            }
+            else {
+                this.showDoneNotes = 'true';
+                this.btnFilter.innerText = 'Offene';
+            }
+            this.showNotes();
+        })
 
         this.editNotesForm.addEventListener('click', (event) => {
             let activeElement = event.target;
@@ -79,22 +130,39 @@ export class NoteController {
             this.editNotesForm.style.display = 'none';
             this.mainPage.style.display = null;
 
-            this.showNotes();
+            this.getDBNotes().then( () => {
+                this.showNotes();
+            });
 
             event.preventDefault();
         });
 
         this.noteContainer.addEventListener( 'click', (event) =>{
 
-            const isButton = (event.target.nodeName === 'BUTTON');
-            if(!isButton){
+            this.formId = event.target.dataset.noteid;
+            let note = this.noteService.getNoteById(this.formId)
+
+            const nodeName = event.target.nodeName;
+            if(nodeName === 'BUTTON'){
+                this.mainPage.style.display = 'none';
+                this.editNotesForm.style.display = null;
+                this.showEditNotes(note);
+            }else if(nodeName === 'INPUT'){
+                if(note.isDone === 'true'){
+                    note.isDone = 'false';
+                    note.doneDate = '';
+                }else{
+                    note.doneDate = new Date().toLocaleDateString('de-CH');
+                    note.isDone = 'true';
+                }
+                this.updateNote(this.formId, note);
+                this.getDBNotes().then( () => {
+                    this.showNotes();
+                });
+            }else{
                 return;
             }
-            this.formId = event.target.dataset.noteid;
 
-            this.mainPage.style.display = 'none';
-            this.editNotesForm.style.display = null;
-            this.showEditNotes(this.noteService.getNoteById(this.formId));
             event.preventDefault();
         });
 
@@ -102,7 +170,9 @@ export class NoteController {
 
     init(){
         this.initEventHandlers();
-        this.showNotes();
+        this.getDBNotes().then( () => {
+            this.showNotes();
+        });
     }
 
 

@@ -1,6 +1,8 @@
 html{
     font-family: 'Maven Pro', sans-serif;
     font-family: sans-serif;
+    background-color: #2b2b2b;
+    color: #e3e8e9;
 }
 
 h1, h2, h3, h4, h5{
@@ -21,14 +23,14 @@ select, header > button:last-child, header > h4:last-of-type{
 }
 
 button, select{
-    background-color: #61b15a;
+    background-color: #9fb5ba;
     outline:none;
     height: 3em;
     border:none;
 }
 
 button:hover, select:hover{
-    background-color: #9fc271;
+    background-color: #42787e;
 }
 
 h4{
@@ -64,6 +66,7 @@ li > label{
 
 li > textarea{
     grid-column: 3 / 9;
+    background-color: #e3e8e9;
 }
 
 li > button{
@@ -78,26 +81,28 @@ li > div {
 
 .notImportant{
     height: 0em;
-    color: #61b15a;
-    background-color: white;
+    color: #37f922;
+    background-color: #2b2b2b;
 }
 
 .notImportant:hover{
-    background-color: white;
-    color: #9fc271;
+    background-color: #2b2b2b;
+    color: #1ec50b;
 }
 
 .important{
     height: 0em;
-    color: orangered;
-    background-color: white;
+    color: #f6c407;
+    background-color: #2b2b2b;
 }
 .important:hover{
-    background-color: white;
-    color: orange;
+    background-color: #2b2b2b;
+    color: #db7e0d;
 }
 
-
+input{
+    background-color: #e3e8e9;
+}
 
 /*form for creating and editing notes*/
 form{

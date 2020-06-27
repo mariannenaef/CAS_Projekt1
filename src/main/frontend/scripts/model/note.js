@@ -1,19 +1,16 @@
 export class Note{
-    constructor(title, description, importance, dueto) {
+    constructor(title, description, importance, dueto, doneDate, isDone) {
         this.title = title;
         this.description = description;
         this.importance = importance;
         this.dueTo = dueto;
-        this.doneDate;
-    }
-
-
-    done(){
-        return !(typeof (this.doneDate) === 'undefined' || this.doneDate === null);
+        this.doneDate = doneDate;
+        this.isDone = isDone;
+        this.createDate = getDateYearMonthDay(new Date());
     }
 
     toString(){
-        return `Titel: ${this.title}, Beschreibung: ${this.description}, Wichtigkeit: ${this.importance}, Erledigen bis ${this.dueTo}, ist erledigt: ${this.done()};`;
+        return `Titel: ${this.title}, Beschreibung: ${this.description}, Wichtigkeit: ${this.importance}, Erledigen bis ${this.dueTo}, erledigt am: ${this.doneDate}, erstellt am: ${this.createDate}`;
     }
 }
 

@@ -1,11 +1,8 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import path from 'path';
-
 import {noteRoutes} from './routes/noteRoutes.js';
 
 const app = express();
-const router = express.Router();
 const allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -23,7 +20,6 @@ app.use(allowCrossDomain);
 app.use("/notes", noteRoutes);
 
 app.use(function (err, req, res, next) {
-   // TODO: hier könnte man spezifische Fehlermeldungen einfügen
     next(console.log(err));
 });
 

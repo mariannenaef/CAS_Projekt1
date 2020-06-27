@@ -10,8 +10,11 @@ class HttpService{
             headers: fetchHeaders,
             body: JSON.stringify(data)
         }).then(response => {
-            console.log(response);
-            return response.json();
+            if(method === 'PUT'){
+                return response.status;
+            }else{
+                return response.json();
+            }
         }).catch(error =>{
             console.error(`There has been a problem with the fetch operation ${method}: ${error}`);
         });
